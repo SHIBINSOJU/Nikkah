@@ -54,9 +54,22 @@ export function family(c) {
   // entirely (no "TBD", no empty labels) and the layout re-centres.
   const single = !brideCard;
 
+  const groomWrapped = groomCard
+    ? groomCard.replace(
+        '<article class="family__card',
+        `<article class="family__card reveal ${single ? "reveal--up" : "reveal--left"}`,
+      )
+    : "";
+  const brideWrapped = brideCard
+    ? brideCard.replace(
+        '<article class="family__card',
+        '<article class="family__card reveal reveal--right',
+      )
+    : "";
+
   return `<section class="section section--family" id="family" aria-labelledby="family-title">
     <div class="container container--wide">
-      <header class="section__head">
+      <header class="section__head reveal reveal--up">
         <p class="eyebrow center">${single ? "With gratitude to our family" : "With gratitude to our families"}</p>
         <h2 class="section__title center" id="family-title">${single ? "Our Family" : "Our Families"}</h2>
         ${divider("divider--section")}
@@ -65,8 +78,8 @@ export function family(c) {
       <div class="family${single ? " family--single" : ""}">
         <span class="family__floral family__floral--left" aria-hidden="true">${florals()}</span>
         <span class="family__floral family__floral--right" aria-hidden="true">${florals("", true)}</span>
-        ${groomCard}
-        ${brideCard}
+        ${groomWrapped}
+        ${brideWrapped}
       </div>
     </div>
   </section>`;

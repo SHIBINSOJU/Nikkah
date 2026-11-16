@@ -21,7 +21,14 @@ function runBuild() {
 
 await runBuild();
 
-spawn(process.execPath, [path.join(root, "scripts/serve.mjs")], { stdio: "inherit" });
+const server = spawn(process.execPath, [path.join(root, "scripts/serve.mjs")], { stdio: "inherit" });
+
+for (const signal of ["SIGINT", "SIGTERM"]) {
+  process.on(signal, () => {
+    server.kill(signal);
+    process.exit(0);
+  });
+}
 
 let queued = null;
 const rebuild = () => {

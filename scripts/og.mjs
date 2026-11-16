@@ -52,19 +52,20 @@ const shell = (body, css) => `<!doctype html>
 /* ── Social card (1200 × 630) ─────────────────────────────────────────────── */
 
 const ogCss = `
-:root{--soft:#f8f7f5;--ink:#292725;--body:#5b5751;--muted:#77736f;--accent:#a69b8d;--line:#dcd7d1}
+:root{--soft:#f8f6f1;--ink:#292725;--body:#4f4b45;--muted:#6b655d;--accent:#b9a477;--line:#d5c5a5}
 *{box-sizing:border-box;margin:0}
 html,body{width:1200px;height:630px;overflow:hidden}
 body{display:grid;place-items:center;background:var(--soft);font-family:"Manrope",sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
 .card{position:relative;width:1200px;height:630px;display:grid;place-items:center;background:
-  radial-gradient(ellipse 62% 78% at 50% 34%,#fff 0%,rgba(255,255,255,.72) 46%,rgba(248,247,245,0) 78%),
-  linear-gradient(180deg,#fdfcfb,#f6f4f1)}
+  radial-gradient(ellipse 62% 78% at 50% 34%,#fffefc 0%,rgba(255,254,252,.78) 46%,rgba(248,246,241,0) 78%),
+  linear-gradient(180deg,#fffefc,#f2eee6)}
 .pattern{position:absolute;inset:0;background-image:${pattern};background-size:150px;opacity:.5;
   -webkit-mask-image:radial-gradient(ellipse 70% 74% at 50% 46%,#000 6%,rgba(0,0,0,.35) 62%,transparent 84%)}
 .arch{position:absolute;inset:8px 150px -60px;color:var(--accent)}
 .arch path{vector-effect:non-scaling-stroke;fill:none}
-.arch .arch__wash{fill:url(#arch-wash);stroke:none}
-.arch .arch__outer{stroke:rgba(166,155,141,.55);stroke-width:1.3}
+.arch .arch__wash{fill:url(#arch-wash-og);stroke:none}
+.arch .arch__outer{stroke:rgba(185,164,119,.7);stroke-width:1.3}
+.arch .arch__inner{stroke:rgba(213,197,165,.62);stroke-width:.95}
 .inner{position:relative;text-align:center;transform:translateY(14px)}
 .bismillah{font-family:"Amiri",serif;font-size:38px;line-height:1.85;color:var(--ink)}
 .meaning{font-size:12.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);margin-top:2px}
@@ -82,7 +83,7 @@ body{display:grid;place-items:center;background:var(--soft);font-family:"Manrope
 const ogHtml = shell(
   `<div class="card">
     <div class="pattern"></div>
-    ${arch("arch")}
+    ${arch("arch", "og")}
     <div class="inner">
       <p class="bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
       <p class="meaning">In the name of Allah, the Most Gracious, the Most Merciful</p>

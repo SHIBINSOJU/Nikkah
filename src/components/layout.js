@@ -19,7 +19,7 @@ export function head(c, ctx) {
     description: site.description,
     image: [ogImage],
     url: site.url || undefined,
-    inLanguage: ["en", "ml", "ar"],
+    inLanguage: ["en", "ar"],
     location: {
       "@type": "Place",
       name: venue.name,
@@ -67,13 +67,13 @@ ${site.url ? `<meta property="og:url" content="${e(site.url)}">` : ""}
 <link rel="manifest" href="/site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&amp;family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&amp;family=Manrope:wght@300;400;500;600&amp;family=Noto+Sans+Malayalam:wght@300;400;500&amp;family=Playfair+Display:wght@400;500;600&amp;display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&amp;family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&amp;family=Manrope:wght@300;400;500;600&amp;family=Noto+Sans+Malayalam:wght@300;400;500&amp;family=Playfair+Display:wght@400;500;600&amp;display=swap">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&amp;family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;family=Manrope:wght@300;400;500;600&amp;family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&amp;family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;family=Manrope:wght@300;400;500;600&amp;family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&amp;display=swap">
 <link rel="stylesheet" href="/styles/main.css">
 <script>document.documentElement.className=document.documentElement.className.replace("no-js","js");</script>
 <script type="application/ld+json">${JSON.stringify(jsonLd)}</script>
 </head>
-<body>
+<body id="top">
 <a class="skip-link" href="#message">Skip to the invitation</a>
 ${sprite()}
 `;
@@ -124,47 +124,40 @@ export function header(c) {
   </header>`;
 }
 
-export function footer(c, ctx, qrReady = false) {
+export function footer(c, ctx) {
   const rsvpNumber = String((c.rsvp && c.rsvp.whatsapp) || "").replace(/\D/g, "");
   const rsvpButton = rsvpNumber
-    ? `<a class="btn btn--ghost" data-rsvp href="https://wa.me/${e(rsvpNumber)}" target="_blank" rel="noopener noreferrer">
+    ? `<a class="btn btn--primary" data-rsvp href="https://wa.me/${e(rsvpNumber)}" target="_blank" rel="noopener noreferrer">
          <svg class="icon" aria-hidden="true"><use href="#i-chat"/></svg>
          <span>${e((c.rsvp && c.rsvp.label) || "Confirm Attendance")}</span>
        </a>`
     : "";
 
-  const qrCard = qrReady
-    ? `<div class="footer-qr">
-         <img class="footer-qr__img" src="/qr-code.png" width="140" height="140" alt="QR code linking to this invitation" loading="lazy">
-         <p class="footer-qr__hint">Scan to open the invitation</p>
-       </div>`
-    : "";
-
   return `<footer class="site-footer" id="footer">
     <div class="container container--narrow">
-      ${divider("divider--footer")}
-      <p class="site-footer__couple">${e(c.groom.name)} <span aria-hidden="true">&amp;</span> ${e(c.bride.name)}</p>
-      <p class="site-footer__meta">${e(ctx.when.longDate)} · ${e(c.venue.city)}, ${e(c.venue.state)}</p>
+      <div class="reveal reveal--scale">
+        ${divider("divider--footer")}
+      </div>
+      <p class="site-footer__couple reveal reveal--up">${e(c.groom.name)} <span aria-hidden="true">&amp;</span> ${e(c.bride.name)}</p>
+      <p class="site-footer__meta reveal reveal--up reveal-delay-1">${e(ctx.when.longDate)} · ${e(c.venue.city)}, ${e(c.venue.state)}</p>
 
-      <div class="site-footer__actions">
+      <div class="site-footer__actions reveal reveal--up reveal-delay-1">
         ${rsvpButton}
         <button class="btn btn--ghost" type="button" data-share>
           <svg class="icon" aria-hidden="true"><use href="#i-share"/></svg>
-          <span>Share invitation</span>
+          <span>Share Invitation</span>
         </button>
         <button class="btn btn--ghost" type="button" data-copy>
           <svg class="icon" aria-hidden="true"><use href="#i-link"/></svg>
-          <span>Copy link</span>
+          <span>Copy Link</span>
         </button>
         <a class="btn btn--ghost" href="#top">
           <svg class="icon" aria-hidden="true"><use href="#i-arrow-up"/></svg>
-          <span>Back to top</span>
+          <span>Back to Top</span>
         </a>
       </div>
 
-      ${qrCard}
-
-      <p class="site-footer__note">Made with love and prayers for our family.</p>
+      <p class="site-footer__note reveal reveal--up reveal-delay-2">Made with love, gratitude, and prayers for our family.</p>
     </div>
 
     <div class="toast" data-toast role="status" aria-live="polite"></div>

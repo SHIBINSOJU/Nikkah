@@ -184,7 +184,7 @@
           observer.unobserve(entry.target);
         });
       },
-      { threshold: 0.12, rootMargin: "0px 0px -6% 0px" },
+      { threshold: 0.08, rootMargin: "0px 0px -4% 0px" },
     );
 
     items.forEach(function (item) {
@@ -213,7 +213,6 @@
     var message = $("[data-countdown-message]");
     var live = $("[data-countdown-live]");
     var messageEn = message ? $(".countdown__message-en", message) : null;
-    var messageMl = message ? $(".countdown__message-ml", message) : null;
     var labels = payload.countdown || {};
     var finished = false;
     var lastAnnouncement = "";
@@ -232,11 +231,11 @@
     function complete(kind) {
       finished = true;
       var isArrived = kind === "arrived";
-      if (messageEn) messageEn.textContent = isArrived ? labels.arrived || "" : labels.past || "";
-      if (messageMl) messageMl.textContent = isArrived ? labels.arrivedMalayalam || "" : labels.pastMalayalam || "";
+      var text = isArrived ? labels.arrived || "" : labels.past || "";
+      if (messageEn) messageEn.textContent = text;
       if (message) message.classList.add("is-visible");
       root.classList.add("is-complete");
-      announce(isArrived ? labels.arrived || "" : labels.past || "");
+      announce(text);
     }
 
     function tick() {

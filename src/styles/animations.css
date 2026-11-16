@@ -1,14 +1,14 @@
 /* ══════════════════════════════════════════════════════════════════════════
-   ANIMATIONS — quiet, slow, decorative
+   ANIMATIONS — directional editorial reveals & quiet ambient motion
    ══════════════════════════════════════════════════════════════════════════ */
 
 @keyframes sway {
   0%,
   100% {
-    transform: rotate(-1.4deg);
+    transform: rotate(-1.2deg);
   }
   50% {
-    transform: rotate(1.4deg);
+    transform: rotate(1.2deg);
   }
 }
 
@@ -18,53 +18,53 @@
     transform: translate3d(0, 0, 0);
   }
   50% {
-    transform: translate3d(0, -10px, 0);
+    transform: translate3d(0, -8px, 0);
   }
 }
 
 @keyframes hero-in {
   from {
     opacity: 0;
-    transform: translateY(14px);
+    transform: translate3d(0, 16px, 0);
   }
   to {
     opacity: 1;
-    transform: none;
+    transform: translate3d(0, 0, 0);
   }
 }
 
 @keyframes soft-pulse {
   0%,
   100% {
-    opacity: 0.45;
+    opacity: 0.5;
   }
   50% {
-    opacity: 0.75;
+    opacity: 0.8;
   }
 }
 
 /* Opening → invitation hand-off */
 html.is-open .hero__inner {
-  animation: hero-in 1.3s var(--ease-out) both;
+  animation: hero-in 1.05s var(--ease-out) both;
 }
 
 .opening__frame {
   transition:
-    transform 1s var(--ease-out),
-    opacity 0.9s var(--ease-soft);
+    transform 0.9s var(--ease-out),
+    opacity 0.8s var(--ease-soft);
 }
 
 .opening.is-closing .opening__frame {
   opacity: 0;
-  transform: scale(1.035);
+  transform: scale(1.025);
 }
 
 .opening__florals--left {
-  animation: drift 14s ease-in-out infinite;
+  animation: drift 16s ease-in-out infinite;
 }
 
 .opening__florals--right {
-  animation: drift 16s ease-in-out infinite reverse;
+  animation: drift 18s ease-in-out infinite reverse;
 }
 
 .hero__florals--left {
@@ -79,23 +79,52 @@ html.is-open .hero__inner {
   animation: soft-pulse 16s ease-in-out infinite;
 }
 
-/* Scroll reveals — enabled only once JS is running (see main.js) */
+/* Scroll-triggered reveals — enabled only once JS is running (see main.js) */
 body.reveal-ready .reveal {
   opacity: 0;
-  transform: translateY(20px);
+  transform: translate3d(0, 22px, 0);
   transition:
-    opacity 1s var(--ease-soft),
-    transform 1s var(--ease-out);
+    opacity 0.9s var(--ease-soft),
+    transform 0.95s var(--ease-out);
   will-change: opacity, transform;
+}
+
+body.reveal-ready .reveal--left {
+  transform: translate3d(-34px, 0, 0);
+}
+
+body.reveal-ready .reveal--right {
+  transform: translate3d(34px, 0, 0);
+}
+
+body.reveal-ready .reveal--up {
+  transform: translate3d(0, 24px, 0);
+}
+
+body.reveal-ready .reveal--scale {
+  transform: scale(0.92);
 }
 
 body.reveal-ready .reveal.is-visible {
   opacity: 1;
-  transform: none;
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+/* Stagger helpers */
+body.reveal-ready .reveal-delay-1 {
+  transition-delay: 0.1s;
+}
+
+body.reveal-ready .reveal-delay-2 {
+  transition-delay: 0.2s;
+}
+
+body.reveal-ready .reveal-delay-3 {
+  transition-delay: 0.3s;
 }
 
 .countdown__unit.reveal {
-  transition-delay: 0.06s;
+  transition-delay: 0.05s;
 }
 
 .countdown__unit:nth-child(2).reveal {
@@ -103,11 +132,11 @@ body.reveal-ready .reveal.is-visible {
 }
 
 .countdown__unit:nth-child(3).reveal {
-  transition-delay: 0.18s;
+  transition-delay: 0.19s;
 }
 
 .countdown__unit:nth-child(4).reveal {
-  transition-delay: 0.24s;
+  transition-delay: 0.26s;
 }
 
 /* ── Reduced motion ─────────────────────────────────────────────────────── */
@@ -126,7 +155,11 @@ body.reveal-ready .reveal.is-visible {
     scroll-behavior: auto !important;
   }
 
-  body.reveal-ready .reveal {
+  body.reveal-ready .reveal,
+  body.reveal-ready .reveal--left,
+  body.reveal-ready .reveal--right,
+  body.reveal-ready .reveal--up,
+  body.reveal-ready .reveal--scale {
     opacity: 1;
     transform: none;
   }

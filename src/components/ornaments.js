@@ -1,12 +1,9 @@
 /**
  * Hand-drawn ornament system.
  *
- * Everything decorative on this site is inline SVG: no images, no icon fonts,
- * nothing that delays the first paint. The artwork is deliberately monoline
- * silver so it stays quiet behind the typography.
+ * Inline SVG architectural arches, botanical line art, hanging lanterns,
+ * mosque skyline and functional icon sprite styled in champagne and muted gold.
  */
-
-/* ── Small utilities ─────────────────────────────────────────────────────── */
 
 const px = (n) => Math.round(n * 100) / 100;
 
@@ -45,32 +42,34 @@ function bud(x, y, rotate, scale = 1) {
 /* ── Arch ────────────────────────────────────────────────────────────────── */
 
 /**
- * The mihrab arch: vertical jambs that sweep into a soft ogee shoulder and meet
- * at a point. The box is stretched to the frame, so every stroke opts into
- * `vector-effect: non-scaling-stroke` (see components.css) and the second line
- * is drawn as truncated inner jambs — a scaled copy of the whole outline would
- * drift apart under a non-uniform stretch.
+ * Double-lined architectural Islamic mihrab arch.
+ * Every stroke uses vector-effect="non-scaling-stroke" so hairline precision
+ * is preserved cleanly across mobile and desktop aspect ratios.
  */
-export function arch(cls = "") {
-  const outline =
-    "M2 100V35C2 20.5 29 10.6 50 3.8C71 10.6 98 20.5 98 35V100";
+export function arch(cls = "", idSuffix = "main") {
+  const outer =
+    "M2 99V35.5C2 20.8 28.5 10.6 50 3.6C71.5 10.6 98 20.8 98 35.5V99";
+  const inner =
+    "M4.2 97.4V36.4C4.2 22.8 29.4 13.4 50 6.8C70.6 13.4 95.8 22.8 95.8 36.4V97.4";
+  const washId = `arch-wash-${idSuffix}`;
 
   return `<svg class="arch ${cls}" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false">
     <defs>
-      <linearGradient id="arch-wash" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stop-color="#ffffff" stop-opacity=".7"/>
-        <stop offset=".5" stop-color="#ffffff" stop-opacity=".32"/>
-        <stop offset="1" stop-color="#ffffff" stop-opacity=".06"/>
+      <linearGradient id="${washId}" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#FFFEFC" stop-opacity=".96"/>
+        <stop offset=".65" stop-color="#FFFEFC" stop-opacity=".86"/>
+        <stop offset="1" stop-color="#F8F6F1" stop-opacity=".72"/>
       </linearGradient>
     </defs>
-    <g fill="none" stroke-linecap="round">
-      <path class="arch__wash" d="${outline}Z" fill="url(#arch-wash)" stroke="none"/>
-      <path class="arch__outer" d="${outline}"/>
+    <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path class="arch__wash" d="${outer}H2Z" fill="url(#${washId})" stroke="none"/>
+      <path class="arch__outer" d="${outer}H2"/>
+      <path class="arch__inner" d="${inner}H4.2"/>
     </g>
   </svg>`;
 }
 
-/** Small mihrab crest used at the top of bordered panels. */
+/** Small mihrab crest used at the top of bordered panels and medallions. */
 export function crest(cls = "") {
   return `<svg class="crest ${cls}" viewBox="0 0 72 34" aria-hidden="true" focusable="false">
     <g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round">
@@ -149,21 +148,21 @@ export function lantern(cls = "", chain = 88) {
   const c = chain;
   return `<svg class="lantern ${cls}" viewBox="0 0 80 ${px(c + 116)}" aria-hidden="true" focusable="false">
     <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1">
-      <path d="M40 0V${c}" stroke-dasharray="1 6" stroke-opacity=".55"/>
+      <path d="M40 0V${c}" stroke-dasharray="1 6" stroke-opacity=".6"/>
       <circle cx="40" cy="${c + 3}" r="2"/>
       <path d="M40 ${c + 5}v5"/>
       <path d="M40 ${c + 10}l3.4 4.4-3.4 4.4-3.4-4.4Z"/>
       <path d="M40 ${c + 18}v3"/>
-      <path d="M26 ${c + 21}h28l4.5 6H21.5Z" fill="#fff"/>
-      <path d="M24 ${c + 27}h32l7 17-6 44H23l-6-44Z" fill="#fdfcf9"/>
-      <path d="M30 ${c + 32}h20l6 12-5 38H29l-5-38Z" fill="#ffffff" stroke-opacity=".85"/>
-      <path d="M40 ${c + 31}v51" stroke-opacity=".38"/>
-      <path d="M28.5 ${c + 44}h23" stroke-opacity=".38"/>
-      <path d="M33 ${c + 70}a7 8 0 0 1 14 0" stroke-opacity=".6"/>
-      <path d="M17 ${c + 88}h46l-7 9H24Z" fill="#fff"/>
+      <path d="M26 ${c + 21}h28l4.5 6H21.5Z" fill="#FFFEFC"/>
+      <path d="M24 ${c + 27}h32l7 17-6 44H23l-6-44Z" fill="#F8F6F1"/>
+      <path d="M30 ${c + 32}h20l6 12-5 38H29l-5-38Z" fill="#FFFEFC" stroke-opacity=".85"/>
+      <path d="M40 ${c + 31}v51" stroke-opacity=".42"/>
+      <path d="M28.5 ${c + 44}h23" stroke-opacity=".42"/>
+      <path d="M33 ${c + 70}a7 8 0 0 1 14 0" stroke-opacity=".65"/>
+      <path d="M17 ${c + 88}h46l-7 9H24Z" fill="#FFFEFC"/>
       <path d="M40 ${c + 97}v5"/>
       <path d="M40 ${c + 102}l3 4-3 4-3-4Z"/>
-      <path d="M40 ${c + 110}v6" stroke-opacity=".4"/>
+      <path d="M40 ${c + 110}v6" stroke-opacity=".45"/>
     </g>
   </svg>`;
 }
@@ -215,12 +214,12 @@ export function skyline(cls = "") {
     [1900, 320, 214],
   ];
   return `<svg class="skyline ${cls}" viewBox="0 0 1920 320" preserveAspectRatio="xMidYMax meet" aria-hidden="true" focusable="false">
-    <g fill="currentColor" fill-opacity=".7">
+    <g fill="currentColor" fill-opacity=".55">
       ${domes.map(([x, y, w, h]) => `<path d="${dome(x, y, w, h)}"/>`).join("")}
       ${minarets.map(([x, y, h]) => `<path d="${minaret(x, y, h)}"/>`).join("")}
-      <path d="M0 304h1920v16H0Z" fill-opacity=".95"/>
+      <path d="M0 304h1920v16H0Z" fill-opacity=".85"/>
     </g>
-    <g fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="1.6">
+    <g fill="none" stroke="#FFFEFC" stroke-opacity=".55" stroke-width="1.6">
       ${[80, 250, 600, 860, 1260, 1620].map((x) => `<path d="M${x - 14} 320v-18a14 14 0 0 1 28 0v18"/>`).join("")}
     </g>
   </svg>`;
@@ -235,13 +234,13 @@ export function sprite() {
   return `<svg class="sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
     <defs>
       <radialGradient id="lantern-glow">
-        <stop offset="0" stop-color="#f0e7d6" stop-opacity=".85"/>
-        <stop offset=".6" stop-color="#f0e7d6" stop-opacity=".22"/>
-        <stop offset="1" stop-color="#f0e7d6" stop-opacity="0"/>
+        <stop offset="0" stop-color="#F2EEE6" stop-opacity=".85"/>
+        <stop offset=".6" stop-color="#D5C5A5" stop-opacity=".22"/>
+        <stop offset="1" stop-color="#F2EEE6" stop-opacity="0"/>
       </radialGradient>
       <linearGradient id="skyline-fade" x1="0" y1="1" x2="0" y2="0">
-        <stop offset="0" stop-color="#B7B7B7" stop-opacity=".28"/>
-        <stop offset="1" stop-color="#B7B7B7" stop-opacity=".02"/>
+        <stop offset="0" stop-color="#B9A477" stop-opacity=".28"/>
+        <stop offset="1" stop-color="#D5C5A5" stop-opacity=".02"/>
       </linearGradient>
     </defs>
 

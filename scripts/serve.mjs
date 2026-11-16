@@ -10,7 +10,8 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "dist");
-const port = Number(process.env.PORT) || 4173;
+const port = Number(process.env.PORT) || 3000;
+const host = process.env.HOST || "0.0.0.0";
 
 const MIME = {
   ".html": "text/html; charset=utf-8",
@@ -55,6 +56,6 @@ const server = http.createServer((req, res) => {
   });
 });
 
-server.listen(port, () => {
-  console.log(`\n  Nikkah invitation → http://localhost:${port}\n  Serving ${root}\n`);
+server.listen(port, host, () => {
+  console.log(`\n  Nikkah invitation → http://${host}:${port}\n  Serving ${root}\n`);
 });

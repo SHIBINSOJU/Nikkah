@@ -14,34 +14,33 @@
 export const invitation = {
   /* ── Site / SEO ─────────────────────────────────────────────────────────── */
   site: {
-    // Set this to the live domain after deployment, e.g. "https://shibil-hiba.pages.dev".
-    // Leave empty to keep canonical + og:url relative (the share URL is always
-    // generated at runtime from the visitor's address bar).
-    url: "",
+    url: "https://nikkah.shotdevs.space",
     title: "Shibil Hussain MK & Hiba Thesni | Nikkah Invitation",
     description:
       "With the blessings of Almighty Allah, you are invited to celebrate the blessed Nikkah of Shibil Hussain MK and Hiba Thesni on 26 January 2027.",
-    themeColor: "#F8F7F5",
+    themeColor: "#F8F6F1",
     ogImage: "/og-image.png",
     locale: "en_IN",
     keywords:
-      "Nikkah invitation, Kerala Muslim wedding, Shibil Hussain MK, Hiba Thesni, Kondotty, Malappuram, Nikkah 2027",
+      "Nikkah invitation, Islamic wedding invitation, Shibil Hussain MK, Hiba Thesni, Kondotty, Malappuram, Kerala, Nikkah 2027",
   },
 
   /* ── Couple ─────────────────────────────────────────────────────────────── */
   groom: {
     name: "Shibil Hussain MK",
     shortName: "Shibil",
+    arabicName: "شبل حسين إم كي",
     father: "Sulfikar Ali",
     mother: "Sunitha P P",
     // Optional portrait, e.g. "/assets/groom.jpg". Leave empty to keep the
-    // ornamental (photograph-free) design.
+    // ornamental (photograph-free) stationery design.
     photo: "",
   },
 
   bride: {
     name: "Hiba Thesni",
     shortName: "Hiba",
+    arabicName: "هبة تسني",
     // Not provided yet — empty values are hidden from the public page.
     father: "",
     mother: "",
@@ -56,12 +55,8 @@ export const invitation = {
     time: "11:00",
     timezone: "Asia/Kolkata",
     timezoneLabel: "IST",
-    // Human-readable form of the timezone, shown under the time.
     timezoneName: "Indian Standard Time",
-    // Calendar duration in minutes.
     durationMinutes: 180,
-    // Used by Google Calendar / .ics. Couple names and the date/time are
-    // appended automatically, so this only needs the invitation wording.
     description:
       "With the blessings of Almighty Allah, we cordially invite you and your family to the Nikkah of {couple}. Your presence and prayers will make this occasion complete.",
   },
@@ -82,17 +77,13 @@ export const invitation = {
   invitation: {
     from: "The Family of Shibil Hussain MK",
     fromLabel: "Groom’s Family",
-    language: "mixed", // "mixed" | "en" | "ml"
-    heroMalayalam: "രണ്ട് ഹൃദയങ്ങൾ, ഒരു മനോഹരമായ തുടക്കം.",
-    coupleNoteMalayalam: "നിക്കാഹ് — രണ്ട് കുടുംബങ്ങളെ ഒന്നിപ്പിക്കുന്ന വിശുദ്ധ വേള.",
+    language: "en",
+    heroSubtitle: "Two hearts united in faith, grace, and lifelong devotion.",
+    coupleNote: "Nikkah — the sacred covenant uniting two families in faith and love.",
     message: {
       en: [
         "With the blessings of Almighty Allah and the love of our family, we cordially invite you and your family to join us in celebrating the blessed Nikkah of our beloved son.",
-        "Your gracious presence and prayers will make this joyous occasion even more meaningful to us.",
-      ],
-      ml: [
-        "അല്ലാഹുവിന്റെ അനുഗ്രഹത്താലും കുടുംബത്തിന്റെ സ്നേഹത്താലും ഞങ്ങളുടെ പ്രിയ മകൻ ശിബിലിന്റെ നിക്കാഹ് ചടങ്ങിലേക്ക് നിങ്ങളെയും കുടുംബത്തെയും ഹൃദയപൂർവ്വം ക്ഷണിക്കുന്നു.",
-        "നിങ്ങളുടെ സാന്നിധ്യവും പ്രാർത്ഥനകളും ഈ സന്തോഷകരമായ അവസരത്തെ കൂടുതൽ മനോഹരമാക്കും.",
+        "Your gracious presence and heartfelt prayers will make this joyous occasion truly meaningful to us.",
       ],
     },
   },
@@ -107,44 +98,37 @@ export const invitation = {
   /* ── RSVP via WhatsApp ──────────────────────────────────────────────────── */
   rsvp: {
     // WhatsApp number in international format, digits only, e.g. "919400000000".
-    // Leave empty to hide the "Confirm attendance" button entirely.
+    // Leave empty to hide the "Confirm Attendance" button entirely.
     whatsapp: "",
     label: "Confirm Attendance",
-    // Pre-filled message the guest sends; {guest} comes from the ?to= link.
     message:
       "Assalamu Alaikum, with the blessings of Allah we will attend the Nikkah of {couple}.",
   },
 
   /* ── Notes for guests (dress code, parking, directions…) ──────────────── */
   guestNotes: {
+    eyebrow: "Guest Information",
     heading: "Notes for Our Guests",
-    malayalam: "അതിഥികൾക്കായി",
     // The whole block stays hidden while this list is empty.
     // Available icons: clock, pin, info, check, chat, calendar.
-    notes: [
-      // { icon: "clock", text: "Kindly be seated by 10:30 AM." },
-      // { icon: "pin", text: "Parking is available near the venue." },
-    ],
+    notes: [],
   },
 
   /* ── Countdown states ───────────────────────────────────────────────────── */
   countdown: {
-    heading: "Countdown to Our Nikkah",
-    malayalam: "നിക്കാഹ് ദിനത്തിലേക്ക്",
+    eyebrow: "Counting the Moments",
+    heading: "Countdown to the Nikkah",
     labels: { days: "Days", hours: "Hours", minutes: "Minutes", seconds: "Seconds" },
-    malayalamLabels: { days: "ദിവസം", hours: "മണിക്കൂർ", minutes: "മിനിറ്റ്", seconds: "സെക്കൻഡ്" },
     arrived: "Alhamdulillah, the blessed day has arrived.",
-    arrivedMalayalam: "അൽഹംദുലില്ലാഹ്, അനുഗ്രഹീത ദിനം എത്തിയിരിക്കുന്നു.",
     past: "Alhamdulillah, the blessed Nikkah has taken place. Thank you for your prayers.",
-    pastMalayalam: "അൽഹംദുലില്ലാഹ്, നിക്കാഹ് പൂർത്തിയായി. നിങ്ങളുടെ പ്രാർത്ഥനകൾക്ക് നന്ദി.",
   },
 
   /* ── Opening screen ─────────────────────────────────────────────────────── */
   opening: {
-    label: "A Special Invitation",
+    label: "Nikkah Invitation",
+    prompt: "With the blessings of Almighty Allah",
     button: "Open Invitation",
-    buttonMalayalam: "ക്ഷണക്കത്ത് തുറക്കുക",
-    skip: "Skip the opening",
+    skip: "Enter directly",
   },
 
   /* ── Blessing ───────────────────────────────────────────────────────────── */
@@ -152,8 +136,6 @@ export const invitation = {
     arabic: "بَارَكَ اللَّهُ لَكُمَا وَبَارَكَ عَلَيْكُمَا وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ",
     english:
       "May Allah bless you both, shower His blessings upon you, and unite you in goodness.",
-    malayalam:
-      "ഈ വിശുദ്ധ വേളയിൽ നിങ്ങൾക്ക് എല്ലാവിധ ഐശ്വര്യങ്ങളും ഉണ്ടാകട്ടെ.",
     closingLabel: "With love and prayers",
     closingName: "The Family of Shibil Hussain MK",
   },
@@ -187,7 +169,7 @@ export const invitation = {
   /* ── Navigation ─────────────────────────────────────────────────────────── */
   nav: [
     { label: "Invitation", href: "#message" },
-    { label: "Our Families", href: "#family" },
+    { label: "Our Family", href: "#family" },
     { label: "Details", href: "#details" },
     { label: "Countdown", href: "#countdown" },
     { label: "Blessings", href: "#blessing" },

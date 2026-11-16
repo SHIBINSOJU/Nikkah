@@ -58,23 +58,6 @@ function jsonForScript(value) {
   return JSON.stringify(value).replace(/</g, "\\u003c").replace(/-->/g, "--\\u003e");
 }
 
-/* Printable QR card for the footer — generated at build time once a live
-   domain exists. Fails softly (offline, blocked) and simply skips the card. */
-async function fetchQrCode(dist, url) {
-  try {
-    const res = await fetch(
-      `https://api.qrserver.com/v1/create-qr-code/?size=520x520&margin=8&format=png&data=${encodeURIComponent(url)}`,
-      { signal: AbortSignal.timeout(8000) },
-    );
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    fs.writeFileSync(path.join(dist, "qr-code.png"), Buffer.from(await res.arrayBuffer()));
-    return true;
-  } catch (error) {
-    console.log(`  ! QR code skipped (${error.message}) — needs network access during build.`);
-    return false;
-  }
-}
-
 async function build() {
   const started = Date.now();
   const c = invitation;
@@ -87,15 +70,11 @@ async function build() {
   const cssBytes = buildStyles();
   fs.copyFileSync(path.join(root, "src/main.js"), path.join(dist, "main.js"));
 
-  const qrReady = c.site.url ? await fetchQrCode(dist, c.site.url) : false;
-
   const payload = {
     countdown: {
       target: ctx.when.instant.toISOString(),
       arrived: c.countdown.arrived,
-      arrivedMalayalam: c.countdown.arrivedMalayalam,
       past: c.countdown.past,
-      pastMalayalam: c.countdown.pastMalayalam,
     },
     share: {
       template: ctx.shareMessage,
@@ -116,7 +95,7 @@ async function build() {
   };
 
   const html = `${head(c, ctx)}
-${opening(c)}
+${opening(c, ctx)}
 ${header(c)}
 ${hero(c, ctx)}
 ${message(c)}
@@ -127,7 +106,7 @@ ${countdown(c, ctx)}
 ${location(c)}
 ${blessing(c)}
 </main>
-${footer(c, ctx, qrReady)}
+${footer(c, ctx)}
 ${audio(c)}
 <script type="application/json" id="invitation-data">${jsonForScript(payload)}</script>
 <script src="/main.js" defer></script>
