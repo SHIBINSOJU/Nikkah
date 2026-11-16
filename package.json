@@ -1,0 +1,17 @@
+{
+  "name": "shibil-hiba-nikkah",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "A luxury Islamic Nikkah invitation website for Shibil Hussain MK and Hiba Thesni.",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "dev": "node scripts/dev.mjs",
+    "preview": "node scripts/serve.mjs",
+    "og": "node scripts/og.mjs",
+    "shot": "node scripts/shot.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "name": "Shibil & Hiba — Nikkah Invitation",
+  "short_name": "Nikkah",
+  "description": "The Nikkah invitation of Shibil Hussain MK and Hiba Thesni — 26 January 2027, Kondotty, Kerala.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F8F7F5",
+  "theme_color": "#F8F7F5",
+  "icons": [
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
