@@ -167,6 +167,19 @@
   color: var(--color-secondary-text);
 }
 
+/* Personalized greeting, filled from the ?to= link parameter. */
+.opening__to {
+  margin-bottom: 0.9rem;
+  font-family: var(--font-serif);
+  font-size: clamp(1.05rem, 4.2vw, 1.32rem);
+  font-style: italic;
+  letter-spacing: 0.03em;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--color-primary-text);
+  text-wrap: balance;
+}
+
 /* ── Panels and prose ───────────────────────────────────────────────────── */
 
 .panel__body {

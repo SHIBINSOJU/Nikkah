@@ -97,6 +97,36 @@ export const invitation = {
     },
   },
 
+  /* ── Guest name personalization ───────────────────────────────────────── */
+  personalization: {
+    // Share the link as .../?to=Rahman%20Family and the opening greets the
+    // guest by name. Leave empty to disable.
+    greeting: "Dear {name},",
+  },
+
+  /* ── RSVP via WhatsApp ──────────────────────────────────────────────────── */
+  rsvp: {
+    // WhatsApp number in international format, digits only, e.g. "919400000000".
+    // Leave empty to hide the "Confirm attendance" button entirely.
+    whatsapp: "",
+    label: "Confirm Attendance",
+    // Pre-filled message the guest sends; {guest} comes from the ?to= link.
+    message:
+      "Assalamu Alaikum, with the blessings of Allah we will attend the Nikkah of {couple}.",
+  },
+
+  /* ── Notes for guests (dress code, parking, directions…) ──────────────── */
+  guestNotes: {
+    heading: "Notes for Our Guests",
+    malayalam: "അതിഥികൾക്കായി",
+    // The whole block stays hidden while this list is empty.
+    // Available icons: clock, pin, info, check, chat, calendar.
+    notes: [
+      // { icon: "clock", text: "Kindly be seated by 10:30 AM." },
+      // { icon: "pin", text: "Parking is available near the venue." },
+    ],
+  },
+
   /* ── Countdown states ───────────────────────────────────────────────────── */
   countdown: {
     heading: "Countdown to Our Nikkah",

@@ -58,17 +58,36 @@ function jsonForScript(value) {
   return JSON.stringify(value).replace(/</g, "\\u003c").replace(/-->/g, "--\\u003e");
 }
 
-function build() {
+/* Printable QR card for the footer — generated at build time once a live
+   domain exists. Fails softly (offline, blocked) and simply skips the card. */
+async function fetchQrCode(dist, url) {
+  try {
+    const res = await fetch(
+      `https://api.qrserver.com/v1/create-qr-code/?size=520x520&margin=8&format=png&data=${encodeURIComponent(url)}`,
+      { signal: AbortSignal.timeout(8000) },
+    );
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    fs.writeFileSync(path.join(dist, "qr-code.png"), Buffer.from(await res.arrayBuffer()));
+    return true;
+  } catch (error) {
+    console.log(`  ! QR code skipped (${error.message}) — needs network access during build.`);
+    return false;
+  }
+}
+
+async function build() {
   const started = Date.now();
   const c = invitation;
   const ctx = buildInviteContext(c);
 
-  fs.rmSync(dist, { recursive: true, force: true });
+  fs.rmSync(dist, { recursive: true, force: true, maxRetries: 5, retryDelay: 100 });
   fs.mkdirSync(path.join(dist, "styles"), { recursive: true });
 
   copyDir(path.join(root, "public"), dist);
   const cssBytes = buildStyles();
   fs.copyFileSync(path.join(root, "src/main.js"), path.join(dist, "main.js"));
+
+  const qrReady = c.site.url ? await fetchQrCode(dist, c.site.url) : false;
 
   const payload = {
     countdown: {
@@ -88,6 +107,12 @@ function build() {
       filename: ctx.calendar.filename,
     },
     music: { src: c.music.src, title: c.music.title },
+    personalization: { greeting: c.personalization?.greeting || "" },
+    rsvp: {
+      whatsapp: c.rsvp?.whatsapp || "",
+      message: c.rsvp?.message || "",
+    },
+    couple: ctx.couple,
   };
 
   const html = `${head(c, ctx)}
@@ -102,7 +127,7 @@ ${countdown(c, ctx)}
 ${location(c)}
 ${blessing(c)}
 </main>
-${footer(c, ctx)}
+${footer(c, ctx, qrReady)}
 ${audio(c)}
 <script type="application/json" id="invitation-data">${jsonForScript(payload)}</script>
 <script src="/main.js" defer></script>
@@ -160,4 +185,4 @@ ${audio(c)}
   console.log(`  → ${path.relative(root, dist)}/`);
 }
 
-build();
+await build();

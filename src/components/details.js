@@ -3,6 +3,9 @@ import { divider } from "./ornaments.js";
 
 const e = escapeHtml;
 
+/* Small icon set the notes may reference — anything else falls back to i-info. */
+const NOTE_ICONS = new Set(["clock", "pin", "info", "check", "chat", "calendar"]);
+
 export function details(c, ctx) {
   const maps = c.venue.mapsUrl;
   const venueLine = [c.venue.city, c.venue.district, c.venue.state].filter(Boolean).join(", ");
@@ -155,8 +158,32 @@ export function location(c) {
           ${action}
         </div>
       </div>
+
+      ${guestNotes(c)}
     </div>
   </section>`;
+}
+
+function guestNotes(c) {
+  const cfg = c.guestNotes || {};
+  const notes = (cfg.notes || []).filter((n) => n && String(n.text || "").trim());
+  if (!notes.length) return "";
+
+  const items = notes
+    .map((n) => {
+      const icon = NOTE_ICONS.has(n.icon) ? n.icon : "info";
+      return `<li class="guest-notes__item">
+        <span class="guest-notes__icon" aria-hidden="true"><svg class="icon"><use href="#i-${icon}"/></svg></span>
+        <span>${e(n.text)}</span>
+      </li>`;
+    })
+    .join("");
+
+  return `<div class="guest-notes reveal" id="guest-notes">
+    <p class="eyebrow center" lang="ml">${e(cfg.malayalam || "")}</p>
+    <h3 class="guest-notes__heading">${e(cfg.heading || "Notes for Our Guests")}</h3>
+    <ul class="guest-notes__list">${items}</ul>
+  </div>`;
 }
 
 export function blessing(c) {

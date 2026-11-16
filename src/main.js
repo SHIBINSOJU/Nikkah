@@ -24,6 +24,35 @@
     return Array.prototype.slice.call((scope || document).querySelectorAll(selector));
   }
 
+  /* ── Guest name (?to=Family+Name) & RSVP links ────────────────────────── */
+
+  var guestName = "";
+  try {
+    var params = new URLSearchParams(window.location.search);
+    guestName = (params.get("to") || "").replace(/[<>`"]/g, "").trim().slice(0, 80);
+  } catch (error) {
+    guestName = "";
+  }
+
+  if (guestName && payload.personalization && payload.personalization.greeting) {
+    var guestEl = $("[data-guest]");
+    if (guestEl) {
+      // textContent keeps the name injection-safe.
+      guestEl.textContent = payload.personalization.greeting.replace("{name}", guestName);
+      guestEl.hidden = false;
+    }
+  }
+
+  $$("[data-rsvp]").forEach(function (link) {
+    var cfg = payload.rsvp || {};
+    var number = String(cfg.whatsapp || "").replace(/\D/g, "");
+    if (!number) return;
+    var message = String(cfg.message || "")
+      .replace("{guest}", guestName)
+      .replace("{couple}", payload.couple || "");
+    link.href = "https://wa.me/" + number + (message ? "?text=" + encodeURIComponent(message) : "");
+  });
+
   /* ── Toast ─────────────────────────────────────────────────────────────── */
 
   var toastEl = $("[data-toast]");

@@ -123,6 +123,23 @@ disappears.
 * `music.src` — leave empty to hide the music button entirely. Point it at an MP3 and
   the button appears, off by default.
 
+### Personalization, RSVP, guest notes, QR card
+
+* `personalization.greeting` — share the link as `https://…/?to=Rahman%20Family` and the
+  opening greets that guest ("Dear Rahman Family,"). Works together with the share
+  button: each recipient can be sent their own personalized link.
+* `rsvp.whatsapp` — a WhatsApp number in international format, digits only (e.g.
+  `"919400000000"`). Fills in a **Confirm Attendance** button in the footer that opens a
+  chat with a pre-filled message (`rsvp.message`; `{guest}` and `{couple}` tokens are
+  replaced at runtime). Leave empty to hide the button.
+* `guestNotes.notes` — a list like `{ icon: "clock", text: "Kindly be seated by 10:30 AM." }`
+  for dress code, parking, directions, etc. Shown under the Location section; the whole
+  block stays hidden while the list is empty. Available icons: `clock`, `pin`, `info`,
+  `check`, `chat`, `calendar`.
+* **QR card** — once `site.url` is set, `npm run build` downloads a QR code for the site
+  into the footer ("Scan to open the invitation"), useful for printed invitations. The
+  build needs network access; if the download fails it prints a note and skips the card.
+
 ### Social preview
 
 `site.url` should be set to the deployed URL (e.g. `https://shibil-hiba.pages.dev`)
@@ -181,10 +198,12 @@ plain nginx. Upload the contents of `dist/`.
 * **Live countdown** — days, hours, minutes and seconds in English and Malayalam,
   corrected for `Asia/Kolkata` regardless of the visitor's clock, with polite
   "today" and "has passed" states.
-* **Location** — a typographic place card plus the map-link state described above.
+* **Location** — a typographic place card plus the map-link state described above, and
+  the optional guest-notes panel (dress code, parking, contact numbers).
 * **Blessing** — the Arabic dua, its English translation and a Malayalam blessing.
-* **Footer** — Share (Web Share API with a WhatsApp fallback), Copy link with a toast
-  confirmation, and Back to top.
+* **Footer** — optional WhatsApp RSVP, Share (Web Share API with a WhatsApp fallback),
+  Copy link with a toast confirmation, Back to top, and — once `site.url` is set — a
+  printable QR card.
 
 ### Accessibility and performance
 

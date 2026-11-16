@@ -414,6 +414,20 @@
     max-width: 920px;
   }
 
+  /* The curtain grows with the canvas so it never looks lost. */
+  .opening__frame {
+    width: min(calc(100% - 3rem), 600px);
+    min-height: min(calc(100svh - 3rem), 800px);
+  }
+
+  .opening__lantern {
+    width: 72px;
+  }
+
+  .opening__florals {
+    width: 380px;
+  }
+
   .hero__florals {
     width: 360px;
   }
@@ -446,6 +460,38 @@
 
   .hero__frame {
     max-width: 980px;
+  }
+
+  /* Large-desktop curtain: wider frame, larger ornaments and type. */
+  .opening__frame {
+    width: min(calc(100% - 4rem), 660px);
+    min-height: min(calc(100svh - 4rem), 900px);
+    padding-top: 4.5rem;
+    padding-bottom: 3.25rem;
+  }
+
+  .opening__lantern {
+    width: 84px;
+  }
+
+  .opening__florals {
+    width: 460px;
+  }
+
+  .opening__bismillah {
+    font-size: 2.8rem;
+  }
+
+  .opening__meaning {
+    font-size: 0.8rem;
+  }
+
+  .opening__to {
+    font-size: 1.55rem;
+  }
+
+  .opening__names {
+    font-size: 1.8rem;
   }
 }
 

@@ -22,6 +22,8 @@ export function opening(c) {
 
         ${divider("divider--opening")}
 
+        <p class="opening__to" data-guest hidden></p>
+
         <p class="eyebrow opening__label">${e(c.opening.label)}</p>
         <p class="opening__names">${e(c.groom.name)} <span class="opening__amp" aria-hidden="true">&amp;</span> ${e(c.bride.name)}</p>
 

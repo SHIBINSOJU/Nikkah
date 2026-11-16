@@ -124,7 +124,22 @@ export function header(c) {
   </header>`;
 }
 
-export function footer(c, ctx) {
+export function footer(c, ctx, qrReady = false) {
+  const rsvpNumber = String((c.rsvp && c.rsvp.whatsapp) || "").replace(/\D/g, "");
+  const rsvpButton = rsvpNumber
+    ? `<a class="btn btn--ghost" data-rsvp href="https://wa.me/${e(rsvpNumber)}" target="_blank" rel="noopener noreferrer">
+         <svg class="icon" aria-hidden="true"><use href="#i-chat"/></svg>
+         <span>${e((c.rsvp && c.rsvp.label) || "Confirm Attendance")}</span>
+       </a>`
+    : "";
+
+  const qrCard = qrReady
+    ? `<div class="footer-qr">
+         <img class="footer-qr__img" src="/qr-code.png" width="140" height="140" alt="QR code linking to this invitation" loading="lazy">
+         <p class="footer-qr__hint">Scan to open the invitation</p>
+       </div>`
+    : "";
+
   return `<footer class="site-footer" id="footer">
     <div class="container container--narrow">
       ${divider("divider--footer")}
@@ -132,6 +147,7 @@ export function footer(c, ctx) {
       <p class="site-footer__meta">${e(ctx.when.longDate)} · ${e(c.venue.city)}, ${e(c.venue.state)}</p>
 
       <div class="site-footer__actions">
+        ${rsvpButton}
         <button class="btn btn--ghost" type="button" data-share>
           <svg class="icon" aria-hidden="true"><use href="#i-share"/></svg>
           <span>Share invitation</span>
@@ -145,6 +161,8 @@ export function footer(c, ctx) {
           <span>Back to top</span>
         </a>
       </div>
+
+      ${qrCard}
 
       <p class="site-footer__note">Made with love and prayers for our family.</p>
     </div>
