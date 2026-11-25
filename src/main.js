@@ -221,6 +221,22 @@
       return value < 10 ? "0" + value : String(value);
     }
 
+    function updateValue(element, value) {
+      if (!element) return;
+      var next = String(value);
+      if (element.textContent === next) return;
+      element.textContent = next;
+      if (!reduceMotion && typeof element.animate === "function") {
+        element.animate(
+          [
+            { opacity: 0.55, transform: "translate3d(0, -5px, 0)" },
+            { opacity: 1, transform: "translate3d(0, 0, 0)" },
+          ],
+          { duration: 300, easing: "cubic-bezier(0.16, 1, 0.3, 1)" },
+        );
+      }
+    }
+
     function announce(text) {
       if (!live) return;
       if (text === lastAnnouncement) return;
@@ -256,10 +272,10 @@
       var minutes = Math.floor((totalSeconds % 3600) / 60);
       var seconds = totalSeconds % 60;
 
-      if (values.days) values.days.textContent = String(days);
-      if (values.hours) values.hours.textContent = pad(hours);
-      if (values.minutes) values.minutes.textContent = pad(minutes);
-      if (values.seconds) values.seconds.textContent = pad(seconds);
+      updateValue(values.days, days);
+      updateValue(values.hours, pad(hours));
+      updateValue(values.minutes, pad(minutes));
+      updateValue(values.seconds, pad(seconds));
 
       var readable =
         days > 0

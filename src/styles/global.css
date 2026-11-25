@@ -14,6 +14,9 @@
   --color-accent: #b9a477;
   --color-accent-deep: #9c8659;
   --color-accent-muted: #d5c5a5;
+  --color-forest: #244c41;
+  --color-forest-deep: #18392f;
+  --color-sage-wash: #edf1eb;
   --color-border: #e6dfd3;
   --color-border-strong: #d5c5a5;
   --color-on-dark: #fffefc;
@@ -59,7 +62,7 @@ html {
 
 body {
   margin: 0;
-  background: var(--color-background-soft);
+  background: linear-gradient(160deg, #fbfaf7 0%, var(--color-background-soft) 52%, #f2f2ec 100%);
   color: var(--color-primary-text);
   font-family: var(--font-body);
   font-weight: 400;
@@ -157,20 +160,27 @@ h4 {
 }
 
 .section--message {
-  background: var(--color-background-soft);
+  background:
+    radial-gradient(ellipse 76% 74% at 50% 0%, rgba(255, 255, 255, 0.92), transparent 78%),
+    linear-gradient(180deg, #f6f4ee 0%, var(--color-background-soft) 100%);
   padding-top: clamp(2rem, 5vw, 4rem);
 }
 
 .section--couple,
 .section--details,
 .section--location {
-  background: var(--color-background);
+  background:
+    radial-gradient(ellipse 72% 58% at 50% 0%, rgba(237, 241, 235, 0.52), transparent 76%),
+    var(--color-background);
   border-top: var(--hairline);
 }
 
 .section--family,
 .section--countdown {
-  background: var(--color-background-warm);
+  background:
+    radial-gradient(ellipse 76% 88% at 4% 55%, rgba(218, 229, 218, 0.42), transparent 72%),
+    radial-gradient(ellipse 72% 84% at 100% 18%, rgba(236, 225, 203, 0.38), transparent 70%),
+    linear-gradient(145deg, #f6f3ec 0%, #f1f2eb 100%);
   border-top: var(--hairline);
 }
 

@@ -65,6 +65,27 @@
   }
 }
 
+@keyframes lattice-drift {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(-10px, 8px, 0) scale(1.025);
+  }
+}
+
+@keyframes ring-breathe {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scale(0.96);
+  }
+  50% {
+    opacity: 0.82;
+    transform: scale(1.025);
+  }
+}
+
 /* Opening → invitation hand-off */
 html.is-open .hero__inner {
   animation: hero-in 1.05s var(--ease-out) both;
@@ -85,6 +106,61 @@ html.is-open .hero__inner {
   animation: drift 16s ease-in-out infinite;
 }
 
+.opening__pattern,
+.hero__pattern {
+  animation: lattice-drift 52s var(--ease-soft) infinite alternate;
+  will-change: transform;
+}
+
+.opening__glow {
+  animation: soft-pulse 18s ease-in-out infinite;
+}
+
+.opening__arch,
+html.is-open .hero__arch {
+  transform-origin: center;
+  animation: mobile-arch-settle 1.15s var(--ease-out) both;
+}
+
+.section__head .divider {
+  opacity: 0.65;
+  transform: scaleX(0.84);
+  transition:
+    opacity 0.8s 0.18s var(--ease-soft),
+    transform 1.15s 0.18s var(--ease-out);
+}
+
+.section__head.is-visible .divider {
+  opacity: 0.92;
+  transform: scaleX(1);
+}
+
+.panel .divider {
+  opacity: 0.65;
+  transform: scaleX(0.84);
+  transition:
+    opacity 0.8s 0.18s var(--ease-soft),
+    transform 1.15s 0.18s var(--ease-out);
+}
+
+.panel.is-visible .divider {
+  opacity: 0.92;
+  transform: scaleX(1);
+}
+
+.hero__inner .divider {
+  opacity: 0.65;
+  transform: scaleX(0.84);
+  transition:
+    opacity 0.8s 0.18s var(--ease-soft),
+    transform 1.15s 0.18s var(--ease-out);
+}
+
+html.is-open .hero__inner .divider {
+  opacity: 0.92;
+  transform: scaleX(1);
+}
+
 .opening__florals--right {
   animation: drift 18s ease-in-out infinite reverse;
 }
@@ -98,7 +174,32 @@ html.is-open .hero__inner {
 }
 
 .hero__glow {
-  animation: soft-pulse 16s ease-in-out infinite;
+  animation: soft-pulse 22s ease-in-out infinite;
+}
+
+.location__ring {
+  animation: ring-breathe 12s ease-in-out infinite;
+}
+
+.location__ring::after {
+  animation: ring-breathe 14s 1.2s ease-in-out infinite reverse;
+}
+
+.couple__medallion {
+  animation: soft-pulse 8s ease-in-out infinite;
+}
+
+.section--blessing::before {
+  animation: lattice-drift 64s var(--ease-soft) infinite alternate;
+}
+
+.family__floral {
+  animation: drift 19s ease-in-out infinite;
+}
+
+.family__floral--right {
+  animation-delay: -9s;
+  animation-direction: reverse;
 }
 
 /* A quiet, sequenced welcome on touch screens. */
@@ -201,6 +302,82 @@ body.reveal-ready .reveal-delay-3 {
   transition-delay: 0.26s;
 }
 
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .family__card,
+  .countdown__unit,
+  .location__visual,
+  .panel {
+    transition:
+      transform 0.55s var(--ease-out),
+      box-shadow 0.55s var(--ease-soft),
+      border-color 0.4s var(--ease-soft);
+  }
+
+  .family__card:hover,
+  .countdown__unit:hover,
+  .location__visual:hover,
+  .panel:hover {
+    transform: translate3d(0, -4px, 0);
+    box-shadow: 0 28px 55px -34px rgba(31, 54, 44, 0.28);
+    border-color: rgba(185, 164, 119, 0.72);
+  }
+
+  .details__icon {
+    transition:
+      transform 0.4s var(--ease-out),
+      box-shadow 0.4s var(--ease-soft),
+      background-color 0.4s var(--ease-soft);
+  }
+
+  .details__item:hover .details__icon {
+    transform: translateY(-3px) rotate(-8deg);
+    background: #fffefa;
+    box-shadow: 0 8px 18px -12px rgba(31, 54, 44, 0.48);
+  }
+
+  .brand__mark {
+    transition: transform 0.55s var(--ease-out);
+  }
+
+  .brand:hover .brand__mark {
+    transform: translateY(-2px) rotate(-4deg);
+  }
+}
+
+@media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
+  html.js .opening:not(.is-gone) .opening__content > :nth-child(1) {
+    animation: mobile-unveil 0.78s 0.08s var(--ease-out) both;
+  }
+
+  html.js .opening:not(.is-gone) .opening__content > :nth-child(2) {
+    animation: mobile-unveil 0.78s 0.16s var(--ease-out) both;
+  }
+
+  html.js .opening:not(.is-gone) .opening__content > :nth-child(5) {
+    animation: mobile-unveil 0.78s 0.28s var(--ease-out) both;
+  }
+
+  html.js .opening:not(.is-gone) .opening__content > :nth-child(6) {
+    animation: mobile-unveil 0.9s 0.36s var(--ease-out) both;
+  }
+
+  html.js .opening:not(.is-gone) .opening__content > :nth-child(7) {
+    animation: mobile-unveil 0.78s 0.47s var(--ease-out) both;
+  }
+
+  html.js .opening:not(.is-gone) .opening__content > :nth-child(8) {
+    animation: mobile-unveil 0.78s 0.54s var(--ease-out) both;
+  }
+
+  html.js .opening:not(.is-gone) .opening__content > :nth-child(9) {
+    animation: mobile-unveil 0.78s 0.62s var(--ease-out) both;
+  }
+
+  html.js .opening:not(.is-gone) .opening__content > :nth-child(10) {
+    animation: mobile-unveil 0.78s 0.7s var(--ease-out) both;
+  }
+}
+
 /* ── Reduced motion ─────────────────────────────────────────────────────── */
 
 @media (prefers-reduced-motion: reduce) {
@@ -227,6 +404,18 @@ body.reveal-ready .reveal-delay-3 {
   }
 
   .opening.is-closing .opening__frame {
+    transform: none;
+  }
+
+  .opening__arch,
+  .hero__arch {
+    transform: none;
+  }
+
+  .section__head .divider,
+  .panel .divider,
+  .hero__inner .divider {
+    opacity: 0.92;
     transform: none;
   }
 }
