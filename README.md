@@ -1,6 +1,6 @@
 # Shibil Hussain MK & Hiba Thesni — Nikkah Invitation
 
-A single-page, photograph-free Nikkah invitation for **26 January 2027**, Kondotty,
+A single-page, photograph-free Nikkah invitation for **24 January 2027**, Kondotty,
 Malappuram. Everything is generated at build time into plain HTML, CSS and a small
 amount of JavaScript — no framework, no backend, no database, no external assets
 other than the Google Fonts stylesheet.
@@ -82,8 +82,8 @@ bride: { name: "…", shortName: "…", father: "",  mother: "",  photo: "" },
 
 ```js
 event: {
-  date: "2027-01-26",
-  time: "11:00",              // 24-hour clock
+  date: "2027-01-24",
+  time: "11:30",              // 24-hour clock
   timezone: "Asia/Kolkata",   // IANA name — used by the countdown and calendar
   timezoneLabel: "IST",
   timezoneName: "Indian Standard Time",

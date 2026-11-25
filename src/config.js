@@ -17,13 +17,8 @@ export const invitation = {
     url: "https://nikkah.shotdevs.space",
     title: "Shibil Hussain MK & Hiba Thesni | Nikkah Invitation",
     description:
-<<<<<<< HEAD
-      "With the blessings of Almighty Allah, you are invited to celebrate the blessed Nikkah of Shibil Hussain MK and Hiba Thesni on 26 January 2027.",
-    themeColor: "#F8F6F1",
-=======
       "With the blessings of Almighty Allah, you are invited to celebrate the blessed Nikkah of Shibil Hussain MK and Hiba Thesni on 24 January 2027.",
     themeColor: "#F8F7F5",
->>>>>>> ca58159 (new)
     ogImage: "/og-image.png",
     locale: "en_IN",
     keywords:
