@@ -83,7 +83,7 @@ bride: { name: "…", shortName: "…", father: "",  mother: "",  photo: "" },
 ```js
 event: {
   date: "2027-01-24",
-  time: "11:30",              // 24-hour clock
+  time: "11:00",              // 24-hour clock
   timezone: "Asia/Kolkata",   // IANA name — used by the countdown and calendar
   timezoneLabel: "IST",
   timezoneName: "Indian Standard Time",

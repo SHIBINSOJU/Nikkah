@@ -52,7 +52,7 @@ export const invitation = {
     title: "Nikkah Ceremony",
     label: "Nikkah Invitation",
     date: "2027-01-24",
-    time: "11:30",
+    time: "11:00",
     timezone: "Asia/Kolkata",
     timezoneLabel: "IST",
     timezoneName: "Indian Standard Time",
